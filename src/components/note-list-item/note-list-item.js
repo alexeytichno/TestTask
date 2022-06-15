@@ -1,4 +1,4 @@
-import './note-list-item.css';
+import './note-list-item.scss';
 import {Component} from "react";
 
 
@@ -73,7 +73,6 @@ class NoteListItem extends Component {
                             onClick={this.props.onDelete}>
                         <i className="fas fa-trash"></i>
                     </button>
-                    <i className="fas fa-star"></i>
                 </div>
             </li>
         )

@@ -1,5 +1,5 @@
 import NoteListItem from '../note-list-item/note-list-item';
-import './note-list.css';
+import './note-list.scss';
 
 const NoteList = ({data, onDelete, onEdit, onNoteEdit,  onTagUpdate}) => {
     const element = data.map(item => {
