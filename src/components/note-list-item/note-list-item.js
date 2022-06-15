@@ -24,16 +24,16 @@ class NoteListItem extends Component {
         // console.log(this.props.id)
     }
 
-    // onTagPush = (name) => {
-    //     this.setState(({state}) => {
-    //         const tag = name.split` `.map(e => e.match(/#/) ? e.replace(/#/g,``) : ``).filter(e => e);
-    //         return ({
-    //             tag: tag
-    //         })
-    //     })
+    onTagPush = (name) => {
+        this.setState(({state}) => {
+            const tag = name.split` `.map(e => e.match(/#/) ? e.replace(/#/g,``) : ``).filter(e => e);
+            return ({
+                tag: tag
+            })
+        })
         
-    //     // this.props.onTagUpdate(this.props.id, this.state.tag);
-    // }
+        this.props.onTagUpdate(this.props.id, this.state.tag);
+    }
     
     renderTags = (tag) => {   
         return tag.map(el => {

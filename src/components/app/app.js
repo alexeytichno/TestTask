@@ -37,7 +37,6 @@ class App extends Component {
   
         this.setState(({data}) => {
             const newArr = [...data, newItem];
-  
             return {
                 data: newArr
             }
@@ -79,9 +78,9 @@ class App extends Component {
         }))
     }
 
-    onFilter = (items) => {
-       return items.filter(element => element.name === 'в магазин' )
-    }
+    // onFilter = (items) => {
+    //    return items.filter(element => element.name === 'в магазин' )
+    // }
     
     
     render() {
