@@ -25,16 +25,13 @@ class NoteListItem extends Component {
     }
 
     onTagPush = (name) => {
-        this.setState(({state}) => {
             const tag = name.split` `.map(e => e.match(/#/) ? e.replace(/#/g,``) : ``).filter(e => e);
-            return ({
+            this.setState ({
                 tag: tag
             })
-        })
+            this.props.onTagUpdate(this.props.id, tag);
+        }
         
-        this.props.onTagUpdate(this.props.id, this.state.tag);
-    }
-    
     renderTags = (tag) => {   
         return tag.map(el => {
             return (
@@ -52,13 +49,13 @@ class NoteListItem extends Component {
         return (
         
             <li className='list-group-item d-flex justify-content-between' >
-                <span className='list-group-item-label'  data-toggle="rise">{
+                <span className='list-group-item-label'  data-toggle="rise" onClick={() => this.onTagPush(this.props.name)}>{
                     this.props.edit ? <div> 
                                 <input onChange={this.onVlaueChange} value={this.state.name} />
                                 <button onClick={this.onNoteChange} style={{width: '100px', boxShadow: '10px 10px 20px rgba(0,0,0, .15)'}}>Сохранить</button>
                             </div>
                             : `${this.props.id}. ${this.state.name}`}
-                {this.renderTags(this.props.tag)}
+                {/* {this.renderTags(this.props.tag)} */}
                 </span>
                 <div className='d-flex justify-content-center align-items-center'>
                     <button type="button"

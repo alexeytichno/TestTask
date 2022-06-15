@@ -11,10 +11,10 @@ class App extends Component {
         this.state ={
             data: [
                 {name: 'в магазин', id: 1, tag: []},
-                {name: "в #кино",  id: 2, tag: ['кино']},
+                {name: "в #кино",  id: 2, tag: []},
                 {name: "в кино", id: 3, tag: []},
-                {name: "в #школу", id: 4, tag: ['школу']},
-                {name: "завтра в #кино", id: 5, tag: ['кино']},
+                {name: "в #школу", id: 4, tag: []},
+                {name: "завтра в #кино", id: 5, tag: []},
             ], 
             edit: false,
         }
