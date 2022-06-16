@@ -10,16 +10,16 @@ class App extends Component {
         super(props);
         this.state ={
             data: [
-                {name: 'в магазин', id: 1,},
-                {name: "в #кино",  id: 2,},
-                {name: "в кино", id: 3, },
-                {name: "в #школу", id: 4, },
-                {name: "завтра в #кино #магазин", id: 5, },
+                // {name: 'в магазин', id: 1,},
+                // {name: "в #кино",  id: 2,},
+                // {name: "в кино", id: 3, },
+                // {name: "в #школу", id: 4, },
+                // {name: "завтра в #кино #магазин", id: 5, },
             ], 
             edit: false,
-            tag: []
+            tag: [],
         }
-        this.maxId = 6 ;
+        this.maxId = 1 ;
     }
 
     deleteItem = (id) => {
@@ -79,6 +79,17 @@ class App extends Component {
         }))
     }
 
+    filterTagShow = (tag) => {
+        if (this.state.tag != '') {
+            return( 
+                <span>
+                    <strong style = {{fontSize: '15px', textDecoration: 'underline', marginLeft: '20px'}}>{tag}</strong>
+                    <span className="modal-close" onClick={() => this.onResetFilter()}>×</span>
+                </span>
+            )
+        }
+    }
+
     dataFilter = (data, tag) => {
         if (tag === ''){
             return data
@@ -99,15 +110,17 @@ class App extends Component {
     
     
     render() {
-      const {data} = this.state;
+    //   console.log(this.state.tag)
+      const {data, tag} = this.state;
       const employees = this.state.data.length;
       const visibleData = this.dataFilter(data, this.state.tag);
     //   console.log(visibleData)
       return (
           <div className="app">
               <AppInfo countStuff={employees}/>
-              <NoteAddForm data={visibleData} onAdd={this.addItem}/>
+              <NoteAddForm data={visibleData} onAdd={this.addItem} />
               <NoteList data={visibleData}
+                        tag={tag}
                         onDelete={this.deleteItem}
                         onEdit = {this.onToggleEdit}
                         onNoteEdit={this.onNoteEdit}
@@ -115,6 +128,7 @@ class App extends Component {
                         dataFilter={this.dataFilter}
                         onUpdateFilter={this.onUpdateFilter}
                         onResetFilter={this.onResetFilter}
+                        filterTagShow={this.filterTagShow}
                         />
           </div>
       )

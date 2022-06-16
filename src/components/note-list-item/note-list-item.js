@@ -43,29 +43,10 @@ class NoteListItem extends Component {
                         <strong onClick={() => this.props.onUpdateFilter(el)}
                                 style = {{fontSize: '15px', textDecoration: 'underline', marginLeft: '20px'}}
                                 >{el}</strong>
-                        <span className="modalclose" onClick = {() => this.props.onResetFilter()}>×</span>
                 </span>
-                
             )
         })
     }
-
-    // parseTags(text) {
-    //     return text.split` `.map(e => e.match(/#/) ? e.replace(/#/g,``) : ``).filter(e => e);
-    // }
-
-    // renderTags(text) {
-    //     // this.parseTags(text).map(tag => (
-    //     //     this.props.onTagUpdate(this.props.id, tag)        
-    //     // ))
-    //     return this.parseTags(text).map(tag => (
-    //         <span
-    //             style = {{fontSize: '15px', textDecoration: 'underline', marginLeft: '20px'}}
-    //             key={tag}>
-    //             <strong onClick={() => console.log(tag)}>{`#${tag}`}</strong>
-    //         </span>
-    //     ));
-    // }
 
     render() { 
         // this.onTagPush(this.props.name)
@@ -76,7 +57,7 @@ class NoteListItem extends Component {
                                 <input onChange={this.onVlaueChange} value={this.state.name} />
                                 <button onClick={this.onNoteChange} style={{width: '100px', boxShadow: '10px 10px 20px rgba(0,0,0, .15)'}}>Сохранить</button>
                             </div>
-                            : `${this.props.id}. ${this.state.name}`}
+                            : ` ${this.state.name}`}
                 {this.renderTags(this.props.name)}
                 </span>
                 <div className='d-flex justify-content-center align-items-center'>
