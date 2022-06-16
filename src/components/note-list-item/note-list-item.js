@@ -24,38 +24,60 @@ class NoteListItem extends Component {
         // console.log(this.props.id)
     }
 
-    onTagPush = (name) => {
-            const tag = name.split` `.map(e => e.match(/#/) ? e.replace(/#/g,``) : ``).filter(e => e);
-            this.setState ({
-                tag: tag
-            })
-            this.props.onTagUpdate(this.props.id, tag);
-        }
-        
-    renderTags = (tag) => {   
+    // onTagPush = (name) => {
+    //         const tag = name.split` `.map(e => e.match(/#/) ? e.replace(/#/g,``) : ``).filter(e => e);
+    //         this.setState ({
+    //             tag: tag
+    //         })
+    //         this.props.onTagUpdate(this.props.id, tag);
+    // }
+    
+    // // 
+
+    renderTags = (name) => {   
+        const tag = name.split` `.map(e => e.match(/#/) ? e : ``).filter(e => e);
+        // this.props.onTagUpdate(this.props.id, tag)
         return tag.map(el => {
             return (
-                <span 
-                    style = {{fontSize: '15px', textDecoration: 'underline', marginLeft: '20px'}}
-                    key ={this.props.id}>
-                        <strong onClick={() => console.log(el)}>{`#${el}`}</strong>
+                <span key ={el}>
+                        <strong onClick={() => this.props.onUpdateFilter(el)}
+                                style = {{fontSize: '15px', textDecoration: 'underline', marginLeft: '20px'}}
+                                >{el}</strong>
+                        <span className="modalclose" onClick = {() => this.props.onResetFilter()}>×</span>
                 </span>
+                
             )
         })
     }
 
+    // parseTags(text) {
+    //     return text.split` `.map(e => e.match(/#/) ? e.replace(/#/g,``) : ``).filter(e => e);
+    // }
+
+    // renderTags(text) {
+    //     // this.parseTags(text).map(tag => (
+    //     //     this.props.onTagUpdate(this.props.id, tag)        
+    //     // ))
+    //     return this.parseTags(text).map(tag => (
+    //         <span
+    //             style = {{fontSize: '15px', textDecoration: 'underline', marginLeft: '20px'}}
+    //             key={tag}>
+    //             <strong onClick={() => console.log(tag)}>{`#${tag}`}</strong>
+    //         </span>
+    //     ));
+    // }
+
     render() { 
         // this.onTagPush(this.props.name)
         return (
-        
             <li className='list-group-item d-flex justify-content-between' >
-                <span className='list-group-item-label'  data-toggle="rise" onClick={() => this.onTagPush(this.props.name)}>{
+                <span className='list-group-item-label'  data-toggle="rise">{
                     this.props.edit ? <div> 
                                 <input onChange={this.onVlaueChange} value={this.state.name} />
                                 <button onClick={this.onNoteChange} style={{width: '100px', boxShadow: '10px 10px 20px rgba(0,0,0, .15)'}}>Сохранить</button>
                             </div>
                             : `${this.props.id}. ${this.state.name}`}
-                {/* {this.renderTags(this.props.tag)} */}
+                {this.renderTags(this.props.name)}
                 </span>
                 <div className='d-flex justify-content-center align-items-center'>
                     <button type="button"

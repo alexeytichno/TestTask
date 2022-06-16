@@ -1,10 +1,10 @@
 import NoteListItem from '../note-list-item/note-list-item';
 import './note-list.scss';
 
-const NoteList = ({data, onDelete, onEdit, onNoteEdit,  onTagUpdate}) => {
+const NoteList = ({data, onDelete, onEdit, onNoteEdit,  onTagUpdate, dataFilter,onUpdateFilter, onResetFilter}) => {
     const element = data.map(item => {
         const {id, ...itemProps} = item;
-        
+    
         return (
             <NoteListItem 
                 key = {id} 
@@ -14,15 +14,16 @@ const NoteList = ({data, onDelete, onEdit, onNoteEdit,  onTagUpdate}) => {
                 onEdit={() => onEdit(id)}
                 onNoteEdit={onNoteEdit}
                 onTagUpdate = {onTagUpdate}
+                dataFilter={dataFilter}
+                onUpdateFilter={onUpdateFilter}
+                onResetFilter={onResetFilter}
                 />
-        )
+                )
     })
-
-
     return (
-        <ul className="app-list list-group">
-            {element}
-        </ul>
+            <ul className="app-list list-group">
+                {element}
+            </ul>
     )
 }
 

@@ -10,15 +10,16 @@ class App extends Component {
         super(props);
         this.state ={
             data: [
-                {name: 'в магазин', id: 1, tag: []},
-                {name: "в #кино",  id: 2, tag: []},
-                {name: "в кино", id: 3, tag: []},
-                {name: "в #школу", id: 4, tag: []},
-                {name: "завтра в #кино", id: 5, tag: []},
+                {name: 'в магазин', id: 1,},
+                {name: "в #кино",  id: 2,},
+                {name: "в кино", id: 3, },
+                {name: "в #школу", id: 4, },
+                {name: "завтра в #кино #магазин", id: 5, },
             ], 
             edit: false,
+            tag: []
         }
-        this.maxId = 6;
+        this.maxId = 6 ;
     }
 
     deleteItem = (id) => {
@@ -67,7 +68,7 @@ class App extends Component {
     }
 
     onTagUpdate = (id, tag) => {
-        console.log(`id: ${id}, tag:${tag}` )
+        // console.log(`id: ${id}, tag:${tag}` )
         this.setState((state) => ({
             data: state.data.map(item => {
                 if(item.id === id) {
@@ -78,26 +79,42 @@ class App extends Component {
         }))
     }
 
-    // onFilter = (items) => {
-    //    return items.filter(element => element.name === 'в магазин' )
-    // }
+    dataFilter = (data, tag) => {
+        if (tag === ''){
+            return data
+        } else return data.filter(el => el.name.includes(tag));
+        // console.log(newData)    
+    }
+
+    onUpdateFilter = (tag) => {
+        // console.log('fnsjfjfnfjds')
+        this.setState({tag});
+    }
+
+    onResetFilter = () => {
+        this.setState({
+            tag:[]
+        })
+    }
     
     
     render() {
       const {data} = this.state;
       const employees = this.state.data.length;
-    //   const visibleData = this.onFilter(data);
-    //   console.log(visibleData);
-    //   data.forEach(i => console.log(i.tag[0]));
+      const visibleData = this.dataFilter(data, this.state.tag);
+    //   console.log(visibleData)
       return (
           <div className="app">
               <AppInfo countStuff={employees}/>
-              <NoteAddForm data={data} onAdd={this.addItem}/>
-              <NoteList data={data}
+              <NoteAddForm data={visibleData} onAdd={this.addItem}/>
+              <NoteList data={visibleData}
                         onDelete={this.deleteItem}
                         onEdit = {this.onToggleEdit}
                         onNoteEdit={this.onNoteEdit}
                         onTagUpdate={this.onTagUpdate}
+                        dataFilter={this.dataFilter}
+                        onUpdateFilter={this.onUpdateFilter}
+                        onResetFilter={this.onResetFilter}
                         />
           </div>
       )
